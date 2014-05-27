@@ -20,38 +20,6 @@ router.get('/userlist', function(req, res) {
 	})
 });
 
-router.get('/deleteuser', function(req,res){
-	var db = req.db;
-	var name = req.query.name;
-	var collection = db.get('usercollection');
-	collection.remove({username:name});
-	 res.location("userlist");
-     // And forward to success page
-     res.redirect("userlist");
-})
-
-router.get('/updateuser', function(req,res){
-	var myname = req.query.name;
-	res.render('updateuser',{"myname":myname})
-});
-
-router.post('/updateuserzz', function(req,res){
-	var db = req.db;
-	var oldname = req.body.oldname;
-	var userName = req.body.username;
-    var userEmail = req.body.useremail;
-	var collection = db.get('usercollection');
-	
-	collection.update({username:oldname},{"username" : userName,
-        "email" : userEmail});
-	
-	 res.location("userlist");
-     // And forward to success page
-     res.redirect("userlist");
-});
-	
-
-
 /* GET New User page. */
 router.get('/newuser', function(req, res) {
     res.render('newuser', { title: 'Add New User' });
