@@ -2,6 +2,7 @@ extends layout
 
 block content
 	h1.
+
 		User List
 	ul
 		each user, i in userlist
@@ -11,3 +12,4 @@ block content
 				a(href="/deleteuser?name=#{user.username}") DELETE
 				
 				a(href="/updateuser?name=#{user.username}") UPDATE
+
