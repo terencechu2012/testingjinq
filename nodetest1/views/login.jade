@@ -1,0 +1,8 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+  form#formLogin(name="login",method="post",action="/authenticated")
+    input#inputPassword(type="text", placeholder="password", name="password")
+    button#btnSubmit(type="submit") Login

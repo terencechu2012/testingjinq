@@ -11,6 +11,17 @@ router.get('/helloworld', function(req, res) {
 	res.render('helloworld', {title: 'Hello, World!'})
 });
 
+/* login */
+router.get('/login', function(req, res) {
+	res.render('login', {title: 'Log In!'})
+});
+
+/*authenticated*/
+router.post('/authenticated', function(req, res) {
+	res.location("/");
+	res.redirect("/");
+});
+
 /* GET userlist page */
 router.get('/userlist', function(req, res) {
 	var db = req.db;
