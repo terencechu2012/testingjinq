@@ -20,6 +20,14 @@ router.get('/userlist', function(req, res) {
 	})
 });
 
+router.get('/userlist2', function(req, res) {
+	var db = req.db;
+	var collection = db.get('usercollection');
+	collection.find({},{},function(e,docs) {
+		res.render('userlist2', {"userlist" : docs});
+	})
+});
+
 /* GET New User page. */
 router.get('/newuser', function(req, res) {
     res.render('newuser', { title: 'Add New User' });
@@ -58,6 +66,36 @@ router.post('/updateuser',function(req,res) {
 			res.redirect("userlist");
 		}
 	});
+});
+
+router.get('/deleteuser', function(req,res){
+	var db = req.db;
+	var name = req.query.name;
+	var collection = db.get('usercollection');
+	collection.remove({username:name});
+	 res.location("userlist2");
+     // And forward to success page
+     res.redirect("userlist2");
+})
+
+router.get('/updateuser2', function(req,res){
+	var myname = req.query.name;
+	res.render('updateuser',{"myname":myname})
+});
+
+router.post('/updateuserzz', function(req,res){
+	var db = req.db;
+	var oldname = req.body.oldname;
+	var userName = req.body.username;
+    var userEmail = req.body.useremail;
+	var collection = db.get('usercollection');
+	
+	collection.update({username:oldname},{"username" : userName,
+        "email" : userEmail});
+	
+	 res.location("userlist2");
+     // And forward to success page
+     res.redirect("userlist2");
 });
 
 
